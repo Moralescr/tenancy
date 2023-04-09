@@ -23,8 +23,16 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
+    
     Route::get('/', function () {
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+        return view('tenancy.welcome');
     });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('tenancy.dashboard');
+        })->name('dashboard');
+    });
+
     require __DIR__ . '/auth.php';
 });
