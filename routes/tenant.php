@@ -8,6 +8,7 @@ use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Tenancy\TaskController;
 
 /*
@@ -36,6 +37,10 @@ Route::middleware([
         Route::get('/dashboard', function () {
             return view('tenancy.dashboard');
         })->name('dashboard');
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::resource('tasks', TaskController::class);
     });
