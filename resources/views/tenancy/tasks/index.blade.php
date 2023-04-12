@@ -8,10 +8,10 @@
 
     <x-container class="py-12">
         <div class="flex justify-end mb-6">
-            <a class="btn btn-blue" href="{{ route('tasks.create') }}"> Add </a>
+            <a class="btn btn-green" href="{{ route('tasks.create') }}"> Add task </a>
         </div>
 
-        @if ($task->count())
+        @if ($tasks->count())
             {{-- Table --}}
             <div class="relative overflow-x-auto mb-6">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -22,6 +22,9 @@
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Task description
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Actions
                             </th>
                         </tr>
                     </thead>
@@ -38,7 +41,7 @@
 
                                 <td class="px-6 py-4">
                                     <div class="flex justify-end">
-                                        <a class="btn btn-green mr-2" href="{{ route('tasks.show', $task) }}">Show</a>
+                                        <a class="btn btn-blue mr-2" href="{{ route('tasks.show', $task) }}">Show</a>
                                         <a class="btn btn-yellow mr-2" href="{{ route('tasks.edit', $task) }}">Edit</a>
                                         <form action="{{ route('tasks.destroy', $task) }}" method="POST">
                                             @csrf
@@ -53,7 +56,7 @@
                 </table>
             </div>
             {{-- Pagination --}}
-            {{ $task->links() }}
+            {{ $tasks->links() }}
         @else
             <div class="card">
                 <div class="card-body">
